@@ -2,13 +2,19 @@ const httpmodule1 = require("http");
 const filesystem1 = require("fs");
 // added file system
 let server1 = httpmodule1.createServer(function (req1, res1) {
+  const txtdata = filesystem1.readFileSync("message1.txt", "utf8");
+  //readed txt data of file by readfileSync method
+  const wrappedContent = "<p>" + txtdata + "</p>";
+  //added that data as p element in wrappedcontent element
   if (req1.url == "/") {
     res1.setHeader("content-type", "text/html");
     res1.write("<html>");
     res1.write("<head>message page</head>");
     res1.write(
-      '<body><form action="/message" method ="POST"><input type="text" name="message"><button type="submit">send</button></form></body>'
+      wrappedContent +
+        '<body><form action="/message" method ="POST"><input type="text" name="message"><button type="submit">send</button></form></body>'
     );
+    //added wrapped content in body
     //remember strictly single   ' '  is required no ""
     //form action="/message" automatically works on host and changes it to localhost:4000/message
     res1.write("</html>");
@@ -23,8 +29,9 @@ let server1 = httpmodule1.createServer(function (req1, res1) {
     });
     req1.on("end", () => {
       const parsedbody = Buffer.concat(body1).toString();
+      const filteredmessage = parsedbody.split("=")[1]
       //buffer is node method which buffers = make chunks collection
-      filesystem1.writeFileSync("message1.txt", parsedbody);
+      filesystem1.writeFileSync("message1.txt", filteredmessage);
       //it will create new file containg message="input values" in folder
     });
 
