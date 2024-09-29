@@ -1,4 +1,6 @@
 const httpmodule1 = require("http");
+const filesystem1 = require("fs");
+// added file system
 let server1 = httpmodule1.createServer(function (req1, res1) {
   if (req1.url == "/") {
     res1.setHeader("content-type", "text/html");
@@ -12,14 +14,15 @@ let server1 = httpmodule1.createServer(function (req1, res1) {
     res1.write("</html>");
     res1.end();
   }
-// after above line code thread reaches below and divert url as wrote
-  if(req1.url == "/message" && req1.method == "POST"){
-    res1.statusCode= 302; // redirct code
-    res1.setHeader('Location' , "/") // location is a syntax not variable 
-    res1.end()
-    //it again changes directory url location / instead of / message that we done by form action 
+  // after above line code thread reaches below and divert url as wrote
+  if (req1.url == "/message" && req1.method == "POST") {
+    filesystem1.writeFileSync("message1.txt", "text to fill like hi");
+    //created a file
+    res1.statusCode = 302; // redirct code
+    res1.setHeader("Location", "/"); // location is a syntax not variable
+    res1.end();
+    //it again changes directory url location / instead of / message that we done by form action
   }
-
 });
 
 server1.listen("4000");
