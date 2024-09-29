@@ -1,6 +1,9 @@
 const httpmodule1 = require("http");
 const { text } = require("stream/consumers");
 let server1 = httpmodule1.createServer(function (req1, res1) {
+
+  //req.url prints  which url we are performing request on , it print whatver is after localhost:4000 in current case
+  //while comparing it with /home/  ,'/home/' doesn.t work
   if (req1.url == /home/) {
     res1.setHeader("content-type", "text/html");
     res1.write("<h1>Welcome home</h1>");
