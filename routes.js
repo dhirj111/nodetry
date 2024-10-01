@@ -33,14 +33,14 @@ const requestHandler = (req1, res1) => {
       //it will create new file containg message="input values" in folder
     });
 
-    //created a file
+    //created a  txt file
     res1.statusCode = 302; // redirct code
     res1.setHeader("Location", "/"); // location is a syntax not variable
-    res1.end();
+   return  res1.end();
     //it again changes directory url location / instead of / message that we done by form action
   }
 };
-module.exports = requestHandler
+module.exports = requestHandler;
 //saved requesthandler in global modules that can be imported anywhere
 
 // to  export  multiple modules  we use object in key value pairs like
@@ -50,6 +50,6 @@ module.exports = requestHandler
 // }
 //now it used as routes1.fun1 in listner
 
-// another way is 
-// module.exports.fun1 = requestHandler 
+// another way is
+// module.exports.fun1 = requestHandler
 //now it again used as routes1.fun1 in listner

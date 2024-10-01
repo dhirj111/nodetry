@@ -10,7 +10,7 @@
     "start-server": "node app1.js",
     "start-server explanation": "its custom command which runs right keyword but used as npm run start-server"
   },
-  "author": "",
+  "author": "bherulaal",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^3.1.7"
