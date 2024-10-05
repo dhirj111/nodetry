@@ -1,4 +1,4 @@
-const httpmodule1 = require("http");
+// const httpmodule1 = require("http");
 const express1 = require('express')
 const app1 = express1();
 //express1 returns a function that we called above and stored in app1.js
@@ -27,9 +27,13 @@ app1.use((req1 , res1 , next1)=>{
   res1.send('<h1> Hello from express </h1>')
   //response.send sends reponse as coder define in bracket
   })
-let server1 = httpmodule1.createServer(app1);
-//we invoked 
-// here routes no needed to be invoke as its listner  and works writte way
-
-server1.listen("4000");
+// let server1 = httpmodule1.createServer(app1);
+// //we invoked 
+// // here routes no needed to be invoke as its listner  and works writte way
+// server1.listen("4000");
 //
+//instead of line 30 , 33 and line 1 to create a server having a  requesthandle(app1 in our case)
+//and then listening to port that can be done as below  ,no need to import http too
+//you can read express git docu.. there code is written of working 
+//https://github.com/expressjs/express/blob/master/lib/application.js  line 609-617
+app1.listen(4000);
