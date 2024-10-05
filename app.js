@@ -21,8 +21,11 @@ next1()
 
 app1.use((req1 , res1 , next1)=>{
   console.log("in the another middleware2 ")
-  next1()
   //jumps to next middleware 
+  //removed next1() as there is no middleware to jump and nor required
+
+  res1.send('<h1> Hello from express </h1>')
+  //response.send sends reponse as coder define in bracket
   })
 let server1 = httpmodule1.createServer(app1);
 //we invoked 
