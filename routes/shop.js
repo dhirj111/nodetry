@@ -13,6 +13,15 @@ const localStorage = new LocalStorage("./scratch");
 // now we can code the middlewares but we have to use methods on
 // router instead of app as router.use('/', { ..middleware})
 
+
+//this is middleware where we are handling actual chat of users
+
+//all functions of this middleware
+//it gets username from localstorage if its second message of user and sets if its first
+//then it reads all previous chats of users by reading message1,txt whole data and prints it on page 
+//then there is form which asks for message of user , it then saves usernsme and message in file and
+//jumps to current middleware again
+
 router.use("/", (req1, res1) => {
   // Store the username if submitted
   let username = localStorage.getItem("username");

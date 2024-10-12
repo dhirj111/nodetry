@@ -14,6 +14,11 @@ router.use("/add-product", (req1, res1, next1) => {
     '<form action = "/product" method ="POST">description<input type = "text" name= "title">size <input type = "number" name= "size"><button type="submit">Add Product</button></form>'
   );
 });
+
+//group chat funcionality
+
+//in /login page of group chat form response asks for username and saves it in local storge 
+//then jumps to chat terminal where user can send message
 router.use("/login", (req1, res1, next1) => {
   console.log("in username ask form");
   res1.send(
