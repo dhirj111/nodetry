@@ -62,6 +62,6 @@ router.post("/", (req1  , res1 ,next1)=>{
   //here type of request is get so it will jump to above .get middleware
 })
 
-
+//
 module.exports = router;
 //we exported above defined router constant in module so that we can import and use this module in app.js
