@@ -59,6 +59,7 @@ router.post("/", (req1  , res1 ,next1)=>{
   console.log("in / middleware " , req1.body)
 ;
   res1.redirect("/")
+  //here type of request is get so it will jump to above .get middleware
 })
 
 
