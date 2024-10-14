@@ -26,6 +26,13 @@ router.use("/login", (req1, res1, next1) => {
     '<form onsubmit="localStorage.setItem(`username`, document.getElementById(`username`).value)" action="/" method="POST"><input id="username" type="text" name"title"><button type="submit">add</button></form>'
   );
 });
+// we can set localstorage as our desired values by providing 
+//onsubmit event as localStorage.setItem(`username`, document.getElementById(`username`).value)"
+//redirection is handled by action in form
+
+
+
+
 
 //below middleware just works for post request on mentionede route/address
 router.use("/product", (req1, res1, next1) => {
