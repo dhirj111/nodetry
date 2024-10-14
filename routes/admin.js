@@ -1,6 +1,6 @@
 const express1 = require("express");
 //imported expres and saved in a constant
-
+const filesystem1 = require("fs");
 const router = express1.Router();
 const bodyparser1 = require("body-parser");
 router.use(bodyparser1.urlencoded({ extended: true }));
@@ -13,7 +13,7 @@ router.use("/add-product", (req1, res1, next1) => {
   res1.send(
     '<form action = "/product" method ="POST">description<input type = "text" name= "title">size <input type = "number" name= "size"><button type="submit">Add Product</button></form>'
   );
-});
+}); 
 
 //group chat funcionality
 
@@ -22,7 +22,8 @@ router.use("/add-product", (req1, res1, next1) => {
 router.use("/login", (req1, res1, next1) => {
   console.log("in username ask form");
   res1.send(
-    '<form action = "/" method ="POST">type username <input type = "text" name= "username"><button type="submit">save username</button></form>'
+    //'<form action = "/" method ="POST">type username <input type = "text" name= "username"><button type="submit">save username</button></form>'
+    '<form onsubmit="localStorage.setItem(`username`, document.getElementById(`username`).value)" action="/" method="POST"><input id="username" type="text" name"title"><button type="submit">add</button></form>'
   );
 });
 
@@ -32,7 +33,18 @@ router.use("/product", (req1, res1, next1) => {
   console.log(req1.body.size);
   //able to use .body because of body-parser package
   res1.redirect("/shop/");
-  //.redirect and then route address
+
+  //   res1.send(`
+//     <p>Previous messages:</p>
+//     <pre>${localStorage.getItem("username")}</pre>
+
+//     <form onsubmit="/" method="POST">
+//       <label for="msg">Enter your message:</label>
+//       <input type="text" name="msg" required>
+//       <button type="submit">Send Message</button>
+//     </form>
+//   `);
+  //.redirect and then route address 
 });
 
 module.exports = router;
