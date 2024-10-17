@@ -4,7 +4,7 @@ const path1 = require('path');
 
 const rootDirectory = require('../utils/path')
 //imported that / utils.path.js file module
-
+const productcontrol = require('../controllers/product')
 const router = express1.Router();
 
 // stored Router method on express1 constant in a new constant
@@ -18,18 +18,9 @@ router.use("/add-product", (req1, res1, next1) => {
   //, it tells location of app.js file so no need to go back from routes
 });
 
-router.use("/contactus", (req1, res1, next1) => {
-  console.log("in the middleware ");
-  res1.sendFile(path1.join(rootDirectory , "views" , "contactus.html"));
-  //by rootdirectory module we can use rootdirectory instead of __dirname 
-  //, it tells location of app.js file so no need to go back from routes
-});
-router.use("/success", (req1, res1, next1) => {
-  console.log("in the middleware ");
-  res1.sendFile(path1.join(rootDirectory , "views" , "success.html"));
-  //by rootdirectory module we can use rootdirectory instead of __dirname 
-  //, it tells location of app.js file so no need to go back from routes
-});
+router.use("/contactus", productcontrol.contactus);
+router.use("/success", productcontrol.success);
+
 router.use("/product", (req1, res1, next1) => { 
   console.log(req1.body.title);
   console.log(req1.body.size);
