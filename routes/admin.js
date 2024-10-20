@@ -1,7 +1,9 @@
+
+
 const express1 = require('express');
 const path1 = require('path');  
 //imported 'path' to use path.join in external file locations 
-
+const Product = require('../models/product');
 const rootDirectory = require('../utils/path')
 //imported that / utils.path.js file module
 const productcontrol = require('../controllers/product')
@@ -11,12 +13,7 @@ const router = express1.Router();
 // now we can code the middlewares but we have to use methods on 
 // router instead of app as router.use('/', { ..middleware})
 
-router.use("/add-product", (req1, res1, next1) => {
-  console.log("in the middleware ");
-  res1.sendFile(path1.join(rootDirectory , "views" , "add-product.html"));
-  //by rootdirectory module we can use rootdirectory instead of __dirname 
-  //, it tells location of app.js file so no need to go back from routes
-});
+router.use("/add-product", productcontrol.getAddProduct);
 
 router.use("/contactus", productcontrol.contactus);
 router.use("/success", productcontrol.success);
