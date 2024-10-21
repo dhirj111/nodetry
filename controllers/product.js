@@ -28,12 +28,14 @@ exports.success = (req1, res1, next1) => {
   res1.sendFile(path1.join(rootDirectory, "views", "success.html"));
   //by rootdirectory module we can use rootdirectory instead of __dirname 
   //, it tells location of app.js file so no need to go back from routes
+}
+exports.showproduct = (req1, res1, next1) => {
+  Product.fetchAll((products) => {
+    console.log(products)
 
-  exports.showproduct = (req1, res1, next1) => {
-    console.log("inside default / ");
-    console.log(Product.fetchAll())
     res1.sendFile(path1.join(rootDirectory, "views", "shop.html"));
-    //by rootdirectory module we can use rootdirectory instead of __dirname 
-    //, it tells location of app.js file so no need to go back from routes
-  }
+  });
+
+  //by rootdirectory module we can use rootdirectory instead of __dirname 
+  //, it tells location of app.js file so no need to go back from routes
 }
