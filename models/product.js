@@ -1,6 +1,6 @@
 const path = require('path');
 const filesystem1 = require('fs');
-
+const rootDirectory = require('../utils/path')
 module.exports = class productserver {
   constructor(n) {
     this.title = n
@@ -8,36 +8,59 @@ module.exports = class productserver {
   save() {
     const path_of_json = path.join(path.dirname(process.mainModule.filename), 'data', 'products.json')
     //here we just got path of new file products.json ,we will store and fetch data from this file
-
+    console.log("saver functin's console")
     filesystem1.readFile(path_of_json, (err, filecontent) => {
-      let productsarr = []
-      //fs.readFile takes two arguments  , pathofiletoread //path_of_json and callback
-      //it throws error details when error and filedata or undefined if there is no file on using filecontent
 
-      if (!err) {
+      let productsarr = [];
+      //productsarr is default unstringed content that we will write as content in products.json
+      //below if no eroor and file is not empty then we read previous data add new input and push it into json
+      if (!err && filecontent.length !== 0) {
+        console.log("inside ! err")
+        let fileparsed = JSON.parse(filecontent);
+        //if file is already there in data then we get [{..} ,{..}] its an array 
+        productsarr = fileparsed
+        //we assigned it to prodcutsarr so productsarr= [{..} ,{..}]
 
-        productsarr = JSON.parse(filecontent);
-        //if file is not empty then we will save all previous data of file in parsed(string) in productarr  
+        productsarr.push(this)
+        // array look like [ { title: 'wewew' }, productserver { title: '444435' }]
+        //after stringfication it will be  [ { title: 'wewew' },{ title: '444435' }]
+        filesystem1.writeFile(path_of_json, JSON.stringify(productsarr), (err) => {
+          console.log(err)
+        })
       }
-      productsarr.push(this)
-      filesystem1.writeFile(path_of_json, JSON.stringify(productsarr), (err) => {
+      //if there is error or json file is blank then we have to push first object {title:90} in []
+      //we done that below 
+      else {
+        productsarr.push(this)
+        filesystem1.writeFile(path_of_json, JSON.stringify(arr1), (err) => {
 
-        console.log(err)
-      })
+          console.log(err)
+        })
+      }
 
     })
   }
+
+  // (products) => {
+  //   console.log("these are products fetched from file", products)
+  //   console.log("fetching completed ")
+  //   res1.sendFile(path1.join(rootDirectory, "views", "shop.html"));
+  // }
+  //this is function that we are passing to below fetchall
   static fetchAll(cb) {
+    //here cb will execute above anon.. function with value we will provide [] or [{..} ,{..}]
     const path_of_json = path.join(path.dirname(process.mainModule.filename), 'data', 'products.json')
     //here we just got path of new file products.json ,we will store and fetch data from this file
     filesystem1.readFile(path_of_json, (err, fileContent) => {
+
       if (err) {
-        cb([])
+        cb([]);
       }
-      else{
-      cb(JSON.parse(fileContent))
+      else {
+        cb(JSON.parse(fileContent))
       }
-  
+
+    })
   }
 
 }

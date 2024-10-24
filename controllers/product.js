@@ -4,15 +4,12 @@ const Product = require('../models/product');
 //we imported that module or this Product is a usable class for this file
 console.log(Product)
 exports.getAddProduct = (req1, res1, next1) => {
-  console.log("in the middleware ");
-  const product = new Product(req1.body.title);
-  //we created and  a new object above line and saved that object inside array below
-  product.save();
-  console.log(Product.fetchAll())
-  //this fetches products but it's a static method so need to be used on classname
-  console.log(product)
+  if (req1.body.title) {
+    const product = new Product(req1.body.title);
+    //object looks as {title:5464} //then we applied save method of models class 
+    product.save();
+  }
   res1.sendFile(path1.join(rootDirectory, "views", "add-product.html"));
-
 }
 
 exports.err = (req1, res1, next1) => {
@@ -30,9 +27,10 @@ exports.success = (req1, res1, next1) => {
   //, it tells location of app.js file so no need to go back from routes
 }
 exports.showproduct = (req1, res1, next1) => {
+  console.log("inside shop")
   Product.fetchAll((products) => {
-    console.log(products)
-
+    console.log("these are products fetched from file", products)
+    console.log("fetching completed ")
     res1.sendFile(path1.join(rootDirectory, "views", "shop.html"));
   });
 
